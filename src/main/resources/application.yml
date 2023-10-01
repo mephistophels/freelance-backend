@@ -1,7 +1,11 @@
 
 server:
-  port: ${MAIN_APP_PORT:8080}
+  port: 8080
   forward-headers-strategy: framework
-  servlet:
-    context-path: /api
+
+spring:
+  security:
+    jwt:
+      secret: 6p7uqQ11A7sVybRQAttToSX6HOJOhMywRcPn6qjmfajgEyp9AJqPyIYBczVZ4LQPMTxx4yrOzPLqobyQmtsDCGZBS0xu03wG
+
 
