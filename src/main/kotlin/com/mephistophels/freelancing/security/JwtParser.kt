@@ -2,6 +2,7 @@ package com.mephistophels.freelancing.security
 
 import com.mephistophels.freelancing.errors.ApiError
 import com.mephistophels.freelancing.errors.CorruptedTokenException
+import com.mephistophels.freelancing.security.model.UserPrincipal
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus

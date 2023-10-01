@@ -1,4 +1,4 @@
-package com.mephistophels.freelancing.security
+package com.mephistophels.freelancing.security.model
 
 import org.springframework.security.core.GrantedAuthority
 import com.mephistophels.freelancing.util.*

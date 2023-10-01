@@ -34,7 +34,7 @@ class JwtFilter(
     ) {
         try {
             val header = request.getHeader("Authorization")
-                ?: throw ApiError(HttpStatus.UNAUTHORIZED, "Authorization header not found")
+                ?: throw ApiError(HttpStatus.UNAUTHORIZED, "Вы не авторизованы","Authorization header not found")
             SecurityContextHolder.getContext().authentication = jwtParser.createAuthToken(header)
             filterChain.doFilter(request, response)
         } catch (exception: ApiError) {

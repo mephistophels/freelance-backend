@@ -1,10 +1,30 @@
 package com.mephistophels.freelancing.database.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
-@Table(name = "User")
+@Table(name = "UserTable")
 class User(
+    @Column(name = "email", nullable = false, unique = true)
+    var email: String,
 
-): AbstractCreatedAtEntity()
+    @Column(name = "surname", nullable = false)
+    var surname: String,
+
+    @Column(name = "name", nullable = false)
+    var name: String,
+
+    @Column(name = "patronymic", nullable = true)
+    var patronymic: String? = null,
+
+    @Column(name = "birthday", nullable = true)
+    var birthday: LocalDate? = null,
+): AbstractCreatedAtEntity() {
+
+    @Column(name = "hash", nullable = false)
+    var hash: String? = null
+}

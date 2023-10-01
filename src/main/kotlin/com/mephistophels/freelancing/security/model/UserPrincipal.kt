@@ -1,4 +1,4 @@
-package com.mephistophels.freelancing.security
+package com.mephistophels.freelancing.security.model
 
 import com.mephistophels.freelancing.util.USER_ROLE
 import org.springframework.security.authentication.AbstractAuthenticationToken

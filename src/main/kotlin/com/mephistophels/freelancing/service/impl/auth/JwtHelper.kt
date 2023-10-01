@@ -1,7 +1,7 @@
 package com.mephistophels.freelancing.service.impl.auth
 
 import com.mephistophels.freelancing.database.entity.User
-import com.mephistophels.freelancing.security.Authority
+import com.mephistophels.freelancing.security.model.Authority
 import com.mephistophels.freelancing.security.JwtParser
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
