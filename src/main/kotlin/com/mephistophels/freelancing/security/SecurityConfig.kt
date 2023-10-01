@@ -33,6 +33,7 @@ class SecurityConfig(
 
         http.authorizeHttpRequests { requests ->
             requests.requestMatchers("$API_PUBLIC/**").permitAll()
+            requests.requestMatchers("$API_VERSION_1/**").hasAnyRole("USER")
         }
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

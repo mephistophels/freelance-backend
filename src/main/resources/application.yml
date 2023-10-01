@@ -7,5 +7,4 @@ spring:
   security:
     jwt:
       secret: 6p7uqQ11A7sVybRQAttToSX6HOJOhMywRcPn6qjmfajgEyp9AJqPyIYBczVZ4LQPMTxx4yrOzPLqobyQmtsDCGZBS0xu03wG
-
-
+      access.lifetime: 1  # days
