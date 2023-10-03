@@ -39,7 +39,10 @@ class User(
     var customerMark: MutableSet<Mark> = HashSet<Mark>()
 
     @OneToMany(mappedBy = "executor")
-    var order: MutableSet<Order> = HashSet<Order>()
+    var workingOrder: MutableSet<Order> = HashSet<Order>()
+
+    @OneToMany(mappedBy = "customer")
+    var createdOrder: MutableSet<Order> = HashSet<Order>()
 
     @OneToMany(mappedBy = "executor")
     var executorMark: Set<Mark> = HashSet<Mark>()

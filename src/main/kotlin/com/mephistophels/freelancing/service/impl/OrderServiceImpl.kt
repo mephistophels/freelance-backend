@@ -27,7 +27,7 @@ class OrderServiceImpl(
     override fun createOrder(request: OrderRequest): OrderResponse {
         val user = userService.findEntityById(getPrincipal().userId)
         val entity = mapper.asEntity(request).apply {
-            this.user = user
+            this.customer = user
         }
         return mapper.asResponse(dao.save(entity))
     }

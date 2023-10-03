@@ -25,8 +25,8 @@ class Order(
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId")
-    lateinit var user: User
+    @JoinColumn(name = "customerId")
+    lateinit var customer: User
 
     @OneToMany(mappedBy = "order")
     var message: Set<Message> = HashSet<Message>()

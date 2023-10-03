@@ -30,7 +30,7 @@ class OrderMapper(
             body = entity.body,
             price = entity.price,
             status = entity.status,
-            user = userMapper.asResponse(entity.user)
+            user = userMapper.asResponse(entity.customer)
         )
     }
 
