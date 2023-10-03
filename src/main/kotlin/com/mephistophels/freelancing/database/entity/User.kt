@@ -39,5 +39,14 @@ class User(
     var customerMark: MutableSet<Mark> = HashSet<Mark>()
 
     @OneToMany(mappedBy = "executor")
+    var order: MutableSet<Order> = HashSet<Order>()
+
+    @OneToMany(mappedBy = "executor")
     var executorMark: Set<Mark> = HashSet<Mark>()
+
+    @OneToMany(mappedBy = "sender")
+    var sendedMessage: Set<Message> = HashSet<Message>()
+
+    @OneToMany(mappedBy = "recipient")
+    var recievedMessage: Set<Message> = HashSet<Message>()
 }

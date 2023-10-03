@@ -7,5 +7,6 @@ import java.util.Optional
 @Repository
 interface UserDao : AppRepository<User> {
     fun findByEmail(email: String): Optional<User>
+
     fun existsByEmail(email: String): Boolean
 }

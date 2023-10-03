@@ -1,12 +1,11 @@
 package com.mephistophels.freelancing.database.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.FetchType
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 
+@Entity
+@Table(name = "MarkTable")
 class Mark(
 
     @Column(name = "mark", nullable = false)
@@ -15,15 +14,20 @@ class Mark(
     @Column(name = "message", nullable = true)
     var message : String,
 
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "customerId")
-    var customer: User,
+    @Column(name = "recipient", nullable = false)
+    var recipient: MarkRecipient,
 
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne()
-    @JoinColumn(name = "executorId")
-    var executor: User
 
 ) : AbstractCreatedAtEntity() {
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customerId")
+    lateinit var customer: User
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "executorId")
+    lateinit var executor: User
 
 }
