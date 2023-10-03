@@ -45,7 +45,7 @@ class OrderServiceImpl(
     }
 
     override fun getPage(request: PageRequest): PageResponse<OrderResponse> {
-        val page = dao.findPage(request.pageable)
+        val page = dao.findAll(request.pageable)
         return mapper.asPageResponse(page)
     }
 
