@@ -6,11 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 import org.springframework.boot.runApplication
 
-@SpringBootApplication(
-//    exclude = [
-//        DataSourceAutoConfiguration::class, DataSourceTransactionManagerAutoConfiguration::class, HibernateJpaAutoConfiguration::class
-//    ]
-)
+@SpringBootApplication()
 class FreelancingApplication
 
 fun main(args: Array<String>) {

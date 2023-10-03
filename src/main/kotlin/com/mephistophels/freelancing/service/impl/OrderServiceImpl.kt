@@ -12,11 +12,13 @@ import com.mephistophels.freelancing.service.OrderService
 import com.mephistophels.freelancing.service.UserService
 import com.mephistophels.freelancing.util.getPrincipal
 import jakarta.transaction.Transactional
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 @Service
 @Transactional
 class OrderServiceImpl(
+    @Lazy
     private val dao: OrderDao,
     private val mapper: OrderMapper,
     private val userService: UserService

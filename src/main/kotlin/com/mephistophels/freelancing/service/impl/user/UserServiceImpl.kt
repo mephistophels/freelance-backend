@@ -7,14 +7,17 @@ import com.mephistophels.freelancing.errors.ResourceNotFoundException
 import com.mephistophels.freelancing.mappers.UserMapper
 import com.mephistophels.freelancing.model.request.RegistrationRequest
 import com.mephistophels.freelancing.service.UserService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl(
-    private val dao: UserDao,
     private val passwordEncoder: PasswordEncoder,
     private val userMapper: UserMapper,
+    @Lazy
+    private val dao: UserDao,
 ) : UserService {
 
     override fun existByEmail(email: String): Boolean {

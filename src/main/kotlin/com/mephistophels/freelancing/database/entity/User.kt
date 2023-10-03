@@ -34,4 +34,10 @@ class User(
 
     @OneToMany(mappedBy = "user")
     var history: Set<Balance> = HashSet<Balance>()
+
+    @OneToMany(mappedBy = "customer")
+    var customerMark: MutableSet<Mark> = HashSet<Mark>()
+
+    @OneToMany(mappedBy = "executor")
+    var executorMark: Set<Mark> = HashSet<Mark>()
 }
