@@ -27,11 +27,11 @@ class User(
 
     @Column(name = "birthday", nullable = true)
     var birthday: LocalDate? = null,
-): AbstractCreatedAtEntity() {
+) : AbstractCreatedAtEntity() {
 
     @Column(name = "hash", nullable = false)
     var hash: String? = null
 
     @OneToMany(mappedBy = "user")
-    var history : Set<Balance> = HashSet<Balance>()
+    var history: Set<Balance> = HashSet<Balance>()
 }

@@ -25,6 +25,10 @@ class UserServiceImpl(
         return dao.findByEmail(email).orElseThrow { ResourceNotFoundException(email) }
     }
 
+    override fun findEntityById(id: Long): User {
+        return dao.findById(id).orElseThrow { ResourceNotFoundException(id) }
+    }
+
     override fun createUser(request: RegistrationRequest): User {
         if (dao.existsByEmail(request.email)) {
             throw AlreadyExistsException(request.email)

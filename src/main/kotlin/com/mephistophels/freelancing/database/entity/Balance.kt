@@ -8,14 +8,12 @@ import org.hibernate.annotations.OnDeleteAction
 @Entity
 @Table(name = "BalanceTable")
 class Balance(
-
     @Column(name = "balanceChange", nullable = false)
-    var price: Int,
+    var price: Int
 
-    ): AbstractCreatedAtEntity() {
-
-        @OnDelete(action = OnDeleteAction.CASCADE)
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "userId")
-        lateinit var user:User
+) : AbstractCreatedAtEntity() {
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "userId")
+    lateinit var user: User
 }

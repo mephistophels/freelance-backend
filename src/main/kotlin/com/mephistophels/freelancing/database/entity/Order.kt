@@ -1,8 +1,7 @@
 package com.mephistophels.freelancing.database.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import jakarta.persistence.*
+import org.hibernate.type.EntityType
 
 
 @Entity
@@ -17,6 +16,7 @@ class Order(
     @Column(name = "price", nullable = false)
     var price: Int,
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false)
-    var status: String,
+    var status: OrderStatus,
 ): AbstractCreatedAtEntity()

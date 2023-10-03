@@ -1,4 +1,4 @@
-package com.mephistophels.freelancing.model.response
+package com.mephistophels.freelancing.model.response.common
 
 import java.time.LocalDateTime
 

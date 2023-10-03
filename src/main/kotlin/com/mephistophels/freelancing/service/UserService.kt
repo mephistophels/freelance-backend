@@ -8,4 +8,5 @@ interface UserService {
     fun createUser(request: RegistrationRequest): User
     fun existByEmail(email: String): Boolean
     fun findEntityByEmail(email: String): User
+    fun findEntityById(id: Long): User
 }

@@ -1,15 +1,12 @@
 package com.mephistophels.freelancing.model.response
 
 import com.mephistophels.freelancing.model.response.common.AbstractCreatedAtResponse
-import java.time.LocalDate
+import com.mephistophels.freelancing.model.response.common.AbstractResponse
 import java.time.LocalDateTime
 
-class UserResponse(
+class OrderResponse(
     id: Long,
-    createdAt: LocalDateTime,
-    val email: String,
-    val surname: String,
-    val name: String,
-    val patronymic: String? = null,
-    val birthday: LocalDate? = null,
+    createdAt: LocalDateTime
+
+
 ): AbstractCreatedAtResponse(id, createdAt)
