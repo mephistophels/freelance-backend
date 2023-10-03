@@ -1,6 +1,8 @@
 package com.mephistophels.freelancing.database.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import org.hibernate.type.EntityType
 
 
@@ -19,4 +21,9 @@ class Order(
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false)
     var status: OrderStatus,
-): AbstractCreatedAtEntity()
+): AbstractCreatedAtEntity() {
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "userId")
+    lateinit var user: User
+}
