@@ -16,7 +16,7 @@ class OrderMapper(
     fun asEntity(request: OrderRequest): Order {
         return Order(
             title = request.title,
-            body = request.body,
+            content = request.content,
             price = request.price,
             status = OrderStatus.CREATED
         )
@@ -27,10 +27,11 @@ class OrderMapper(
             id = entity.id,
             createdAt = entity.createdAt,
             title = entity.title,
-            body = entity.body,
+            content = entity.content,
             price = entity.price,
             status = entity.status,
-            user = userMapper.asResponse(entity.customer)
+            customer = userMapper.asResponse(entity.customer),
+            executor = userMapper.asNullableResponse(entity.executor)
         )
     }
 

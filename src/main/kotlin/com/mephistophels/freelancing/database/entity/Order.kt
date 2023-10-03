@@ -3,7 +3,6 @@ package com.mephistophels.freelancing.database.entity
 import jakarta.persistence.*
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import org.hibernate.type.EntityType
 
 
 @Entity
@@ -12,8 +11,8 @@ class Order(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @Column(name = "body", nullable = false)
-    var body: String,
+    @Column(name = "content", nullable = false)
+    var content: String,
 
     @Column(name = "price", nullable = false)
     var price: Int,
@@ -32,9 +31,9 @@ class Order(
     var message: Set<Message> = HashSet<Message>()
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "executorId")
-    lateinit var executor: User
+    var executor: User? = null
 
     @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinTable(

@@ -7,11 +7,9 @@ import org.hibernate.annotations.OnDeleteAction
 @Entity
 @Table(name = "MessageTable")
 class Message(
-
     @Column(name = "message", nullable = true)
-    var message : String,
-
-    ) : AbstractCreatedAtEntity(){
+    var message : String
+) : AbstractCreatedAtEntity(){
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

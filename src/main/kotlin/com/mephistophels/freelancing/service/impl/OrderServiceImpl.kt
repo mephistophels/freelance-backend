@@ -1,6 +1,7 @@
 package com.mephistophels.freelancing.service.impl
 
 import com.mephistophels.freelancing.database.entity.Order
+import com.mephistophels.freelancing.database.entity.OrderStatus
 import com.mephistophels.freelancing.database.repository.OrderDao
 import com.mephistophels.freelancing.errors.ResourceNotFoundException
 import com.mephistophels.freelancing.mappers.OrderMapper
@@ -13,19 +14,19 @@ import com.mephistophels.freelancing.service.UserService
 import com.mephistophels.freelancing.util.getPrincipal
 import jakarta.transaction.Transactional
 import org.springframework.context.annotation.Lazy
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.stereotype.Service
 
 @Service
 @Transactional
 class OrderServiceImpl(
-    @Lazy
     private val dao: OrderDao,
     private val mapper: OrderMapper,
     private val userService: UserService
 ) : OrderService {
 
     override fun createOrder(request: OrderRequest): OrderResponse {
-        val user = userService.findEntityById(getPrincipal().userId)
+        val user = userService.findEntityById(getPrincipal())
         val entity = mapper.asEntity(request).apply {
             this.customer = user
         }
@@ -36,6 +37,13 @@ class OrderServiceImpl(
         val entity = findEntityById(id)
         dao.delete(entity)
         return mapper.asResponse(entity)
+    }
+
+    @Modifying
+    override fun changeStatus(id: Long, status: OrderStatus): Order {
+        val entity = findEntityById(id)
+        entity.status = status
+        return entity
     }
 
     override fun findEntityById(id: Long): Order {

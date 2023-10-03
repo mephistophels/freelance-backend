@@ -17,6 +17,10 @@ class UserMapper {
             birthday = request.birthday
         )
     }
+    fun asNullableResponse(entity: User?): UserResponse? {
+        return if (entity == null) null else asResponse(entity)
+    }
+
     fun asResponse(entity: User): UserResponse {
         return UserResponse(
             id = entity.id,
