@@ -27,6 +27,13 @@ class User(
 
     @Column(name = "birthday", nullable = true)
     var birthday: LocalDate? = null,
+
+    @Column(name = "bio", nullable = true)
+    var bio: String? = null,
+
+    @Column(name = "imageLink", nullable = true)
+    var link:String? = null
+
 ) : AbstractCreatedAtEntity() {
 
     @Column(name = "hash", nullable = false)
