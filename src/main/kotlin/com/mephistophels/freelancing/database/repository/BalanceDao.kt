@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository
 interface BalanceDao : AppRepository<Balance>, PagingAndSortingRepository<Balance, Long> {
     @Query("SELECT sum(b.price) FROM Balance b WHERE b.user.id = ?1")
     fun getUserBalance(userId: Long): Long
+
 }

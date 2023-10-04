@@ -8,5 +8,10 @@ import java.util.Optional
 interface UserDao : AppRepository<User> {
     fun findByEmail(email: String): Optional<User>
 
+    override fun findById(id: Long) : Optional<User>
+
+
     fun existsByEmail(email: String): Boolean
+
+
 }
