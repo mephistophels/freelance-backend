@@ -43,4 +43,6 @@ class Order(
     )
     var executors: MutableList<User> = mutableListOf()
 
+    @OneToMany(mappedBy = "order")
+    var mark: Set<Mark> = HashSet<Mark>()
 }

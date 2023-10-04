@@ -30,4 +30,8 @@ class Mark(
     @JoinColumn(name = "executorId")
     lateinit var executor: User
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "orderId")
+    lateinit var order: Order
 }
