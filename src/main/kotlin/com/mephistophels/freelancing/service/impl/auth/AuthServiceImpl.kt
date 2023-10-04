@@ -6,7 +6,7 @@ import com.mephistophels.freelancing.mappers.UserMapper
 import com.mephistophels.freelancing.model.request.LoginRequest
 import com.mephistophels.freelancing.model.request.RegistrationRequest
 import com.mephistophels.freelancing.model.response.LoginResponse
-import com.mephistophels.freelancing.model.response.UserResponse
+import com.mephistophels.freelancing.model.response.user.UserResponse
 import com.mephistophels.freelancing.service.AuthService
 import com.mephistophels.freelancing.service.UserService
 import jakarta.transaction.Transactional

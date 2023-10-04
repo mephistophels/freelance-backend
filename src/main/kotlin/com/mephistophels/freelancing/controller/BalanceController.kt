@@ -5,9 +5,11 @@ import com.mephistophels.freelancing.mappers.BalanceMapper
 import com.mephistophels.freelancing.model.request.BalanceOperationRequest
 import com.mephistophels.freelancing.model.request.PageRequest
 import com.mephistophels.freelancing.model.response.BalanceOperationResponse
+import com.mephistophels.freelancing.model.response.UserBalanceResponse
 import com.mephistophels.freelancing.model.response.common.PageResponse
 import com.mephistophels.freelancing.service.BalanceService
 import com.mephistophels.freelancing.util.API_VERSION_1
+import com.mephistophels.freelancing.util.getPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -28,6 +30,11 @@ class BalanceController(
      @PostMapping("/withdraw")
     fun withdrawFromBalance(@RequestBody request: BalanceOperationRequest): BalanceOperationResponse {
         return service.withdrawFromBalance(request)
+    }
+
+    @GetMapping("/info")
+    fun getBalanceInfo(): UserBalanceResponse {
+        return service.getBalanceAmount(getPrincipal())
     }
 
 }

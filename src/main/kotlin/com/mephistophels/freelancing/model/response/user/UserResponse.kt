@@ -1,10 +1,10 @@
-package com.mephistophels.freelancing.model.response
+package com.mephistophels.freelancing.model.response.user
 
 import com.mephistophels.freelancing.model.response.common.AbstractCreatedAtResponse
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class UserResponse(
+open class UserResponse(
     id: Long,
     createdAt: LocalDateTime,
     val email: String,

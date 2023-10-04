@@ -19,4 +19,6 @@ class RegistrationRequest(
     @field:Size(max = 255)
     val patronymic: String? = null,
     val birthday: LocalDate? = null,
+    @field:Size(max = 3000)
+    var bio: String? = null
 )
