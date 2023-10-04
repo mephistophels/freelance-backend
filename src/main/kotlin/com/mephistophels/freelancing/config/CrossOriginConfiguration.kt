@@ -2,10 +2,13 @@ package com.mephistophels.freelancing.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
 import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
@@ -14,7 +17,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class CrossOriginConfiguration : WebMvcConfigurer {
 
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**").allowedMethods("*")
+        registry.addMapping("/**")
+            .allowedOriginPatterns("*")
+            .allowedMethods("*")
+            .allowedHeaders("*")
+            .allowCredentials(true)
+    }
+
+    @Bean
+    @Primary
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration().apply {
+            allowedOriginPatterns = listOf("*")
+            allowedMethods = listOf("*")
+            allowedHeaders = listOf("*")
+            allowCredentials = true
+        }
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 
     @Bean
