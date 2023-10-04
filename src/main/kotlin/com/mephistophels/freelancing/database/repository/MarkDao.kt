@@ -8,5 +8,9 @@ interface MarkDao: AppRepository<Mark> {
 
     fun findByRecipientAndCustomerIdAndExecutorIdAndOrderId(recipient: MarkRecipient, customerId: Long, executorId:Long, orderId: Long): Optional<Mark>
 
+    fun findByCustomerId(customerId: Long): Optional<Mark>
 
+    fun findByExecutorId(executorId: Long): Optional<Mark>
+
+    fun findByOrderId(orderId: Long): Optional<Mark>
 }
