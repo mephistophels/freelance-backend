@@ -13,7 +13,6 @@ import com.mephistophels.freelancing.service.OrderService
 import com.mephistophels.freelancing.service.UserService
 import com.mephistophels.freelancing.util.getPrincipal
 import jakarta.transaction.Transactional
-import org.springframework.context.annotation.Lazy
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.stereotype.Service
 
@@ -46,6 +45,18 @@ class OrderServiceImpl(
         return entity
     }
 
+    // 2) мои задания (создал)
+    override fun getListMyCreatedOrders(request: PageRequest): PageResponse<OrderResponse> {
+        val page = dao.findAllByCustomerId(getPrincipal(), request.pageable)
+        return mapper.asPageResponse(page)
+    }
+
+    // 1) мои задания (делаю)
+    override fun getListMyDoingOrders(request: PageRequest): PageResponse<OrderResponse> {
+        val page = dao.findAllByExecutorId(getPrincipal(), request.pageable)
+        return mapper.asPageResponse(page)
+    }
+
     override fun findEntityById(id: Long): Order {
         return dao.findById(id).orElseThrow { ResourceNotFoundException(id) }
     }
@@ -54,8 +65,9 @@ class OrderServiceImpl(
         return mapper.asResponse(findEntityById(id))
     }
 
-    override fun getPage(request: PageRequest): PageResponse<OrderResponse> {
-        val page = dao.findAll(request.pageable)
+    // 3) те, у которых нет исполнителя
+    override fun getPageCreatedOrders(request: PageRequest): PageResponse<OrderResponse> {
+        val page = dao.findAllByStatusIs(OrderStatus.CREATED, request.pageable)
         return mapper.asPageResponse(page)
     }
 

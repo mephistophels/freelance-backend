@@ -16,4 +16,4 @@ class UserFullResponse(
     bio: String? = null,
     mark: UserMarkResponse,
     val balance: UserBalanceResponse,
-) : UserMediumResponse(id, createdAt, email, surname, name, patronymic, birthday, bio, mark)
+) : UserMediumResponse(id, createdAt, email, surname, name, patronymic, birthday, mark, bio)

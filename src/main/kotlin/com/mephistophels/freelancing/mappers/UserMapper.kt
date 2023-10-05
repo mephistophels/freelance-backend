@@ -7,11 +7,16 @@ import com.mephistophels.freelancing.model.response.UserMarkResponse
 import com.mephistophels.freelancing.model.response.user.UserFullResponse
 import com.mephistophels.freelancing.model.response.user.UserMediumResponse
 import com.mephistophels.freelancing.model.response.user.UserResponse
+import com.mephistophels.freelancing.service.BalanceService
+import com.mephistophels.freelancing.service.MarkService
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 
 
 @Component
-class UserMapper {
+class UserMapper(
+    @Lazy private val markService: MarkService
+) {
     fun asEntity(request: RegistrationRequest): User {
         return User(
             email = request.email,
@@ -34,7 +39,8 @@ class UserMapper {
             name = entity.name,
             patronymic = entity.patronymic,
             surname = entity.surname,
-            birthday = entity.birthday
+            birthday = entity.birthday,
+            mark = markService.getUserMark(entity)
         )
     }
 

@@ -5,11 +5,14 @@ import com.mephistophels.freelancing.model.request.BalanceOperationRequest
 import com.mephistophels.freelancing.model.response.BalanceOperationResponse
 import com.mephistophels.freelancing.model.response.UserBalanceResponse
 import com.mephistophels.freelancing.model.response.common.PageResponse
+import org.springframework.context.annotation.Lazy
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Component
 
 @Component
-class BalanceMapper {
+class BalanceMapper(
+    @Lazy private val orderMapper: OrderMapper
+) {
     fun asEntity(request: BalanceOperationRequest): Balance {
         return Balance(request.price)
     }
@@ -18,7 +21,8 @@ class BalanceMapper {
         return BalanceOperationResponse(
             id = entity.id,
             createdAt = entity.createdAt,
-            price = entity.price
+            price = entity.price,
+            order = orderMapper.asNullableResponse(entity.order)
         )
     }
 

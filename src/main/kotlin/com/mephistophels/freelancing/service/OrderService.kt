@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable
 
 interface OrderService {
     fun findEntityById(id: Long): Order
-    fun getPage(request: PageRequest): PageResponse<OrderResponse>
+    fun getPageCreatedOrders(request: PageRequest): PageResponse<OrderResponse>
     fun getById(id: Long): OrderResponse
     fun createOrder(request: OrderRequest): OrderResponse
     fun deleteOrder(id: Long): OrderResponse
     fun changeStatus(id: Long, status: OrderStatus): Order
+    fun getListMyCreatedOrders(request: PageRequest): PageResponse<OrderResponse>
+    fun getListMyDoingOrders(request: PageRequest): PageResponse<OrderResponse>
 }

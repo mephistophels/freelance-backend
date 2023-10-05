@@ -28,8 +28,18 @@ class OrderController(
         return service.deleteOrder(id)
     }
 
+    @GetMapping("/list/my/created")
+    fun getListMyCreatedOrders(request: PageRequest): PageResponse<OrderResponse> {
+        return service.getListMyCreatedOrders(request)
+    }
+
+    @GetMapping("/list/my/inprogress")
+    fun getListMyDoingOrders(request: PageRequest): PageResponse<OrderResponse> {
+        return service.getListMyDoingOrders(request)
+    }
+
     @GetMapping("/list")
     fun getOrderList(request: PageRequest): PageResponse<OrderResponse> {
-        return service.getPage(request)
+        return service.getPageCreatedOrders(request)
     }
 }

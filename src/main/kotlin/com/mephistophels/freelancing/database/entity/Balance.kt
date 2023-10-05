@@ -16,4 +16,9 @@ class Balance(
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId")
     lateinit var user: User
+
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "orderId")
+    var order: Order? = null
 }
