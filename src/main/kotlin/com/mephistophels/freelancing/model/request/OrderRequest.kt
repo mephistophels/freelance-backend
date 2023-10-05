@@ -7,5 +7,6 @@ class OrderRequest(
     val title: String,
     @field:Size(min = 1, max = 5_000)
     val content: String,
+    @field:Size(min = 1)
     val price: Int = 0
 )
