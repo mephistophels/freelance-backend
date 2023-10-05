@@ -3,6 +3,7 @@ package com.mephistophels.freelancing.database.repository
 import com.mephistophels.freelancing.database.entity.Balance
 import com.mephistophels.freelancing.database.entity.Order
 import com.mephistophels.freelancing.database.entity.OrderStatus
+import com.mephistophels.freelancing.model.response.user.ExecutorToOrderResponse
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
@@ -52,4 +53,18 @@ interface OrderDao : AppRepository<Order>, PagingAndSortingRepository<Order, Lon
         @Param("orderId") orderId: Long,
         @Param("executorId") executorId: Long,
     )
+
+    @Query(
+        value = "select * from ExecutorRequestToOrderTable where orderId = ?1 and executorId = ?2",
+        nativeQuery = true
+    )
+    @Transactional
+    fun getExecutorRequest(orderId: Long, executorId: Long) :  ExecutorToOrderResponse
+
+    @Query(
+        value = "select * from ExecutorRequestToOrderTable where orderId = ?1",
+        nativeQuery = true
+    )
+    @Transactional
+    fun getExecutorRequest(orderId: Long) :  List<ExecutorToOrderResponse>?
 }
