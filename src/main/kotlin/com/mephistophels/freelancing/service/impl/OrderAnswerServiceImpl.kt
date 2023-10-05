@@ -48,6 +48,7 @@ class OrderAnswerServiceImpl(
         val entity = mapper.asEntity(request).apply {
             this.order = order
         }.also { dao.save(it) }
+        entity.order.status = OrderStatus.DONE
         return mapper.asResponse(entity)
     }
 
