@@ -6,6 +6,7 @@ import com.mephistophels.freelancing.model.response.OrderResponse
 import com.mephistophels.freelancing.model.response.common.PageResponse
 import com.mephistophels.freelancing.service.OrderService
 import com.mephistophels.freelancing.util.API_VERSION_1
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -14,7 +15,7 @@ class OrderController(
     private val service: OrderService
 ) {
     @PostMapping
-    fun createOrder(@RequestBody request: OrderRequest): OrderResponse {
+    fun createOrder(@Valid @RequestBody request: OrderRequest): OrderResponse {
         return service.createOrder(request)
     }
 
