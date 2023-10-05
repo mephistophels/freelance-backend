@@ -40,7 +40,7 @@ class UserMapper(
             patronymic = entity.patronymic,
             surname = entity.surname,
             birthday = entity.birthday,
-            mark = markService.getUserMark(entity)
+            mark = markService.getUserMark(entity.id)
         )
     }
 

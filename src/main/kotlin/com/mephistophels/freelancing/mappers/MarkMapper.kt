@@ -13,7 +13,7 @@ import java.util.*
 @Component
 class MarkMapper {
 
-    fun asUserMarkResponse(markAsCustomer: Double, markAsExecutor: Double) = UserMarkResponse(markAsCustomer = markAsCustomer, markAsExecutor = markAsExecutor)
+    fun asUserMarkResponse(markAsCustomer: Double?, markAsExecutor: Double?) = UserMarkResponse(markAsCustomer = markAsCustomer, markAsExecutor = markAsExecutor)
 
     fun asMarkResponse(
         mark: Int,

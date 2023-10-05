@@ -26,7 +26,7 @@ class BalanceMapper(
         )
     }
 
-    fun asBalanceResponse(amount: Int) = UserBalanceResponse(amount = amount)
+    fun asBalanceResponse(amount: Int?) = UserBalanceResponse(amount = amount)
 
     fun asPageResponse(page: Page<Balance>): PageResponse<BalanceOperationResponse> {
         return PageResponse.build(page, ::asOperationResponse)

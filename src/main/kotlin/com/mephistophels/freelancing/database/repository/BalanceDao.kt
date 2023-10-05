@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BalanceDao : AppRepository<Balance>, PagingAndSortingRepository<Balance, Long>, CrudRepository<Balance, Long> {
     @Query(value = "SELECT sum(b.price) FROM Balance b WHERE b.user.id = ?1")
-    fun getUserBalance(userId: Long): Int
+    fun getUserBalance(userId: Long): Int?
 
     @Query(value ="select b.price from Balance b where b.user.id = ?1")
     fun getUserBalanceHistory(userId: Long) : List<Int>

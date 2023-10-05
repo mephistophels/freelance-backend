@@ -37,7 +37,7 @@ class BalanceServiceImpl(
     }
 
     override fun getBalanceAmount(user: User): UserBalanceResponse {
-        val amount = dao.getUserBalance(user.id)
+        val amount: Int? = dao.getUserBalance(user.id)
         return mapper.asBalanceResponse(amount)
     }
 
@@ -57,7 +57,7 @@ class BalanceServiceImpl(
         if (request.price <= 0) throw ApiError(status = HttpStatus.BAD_REQUEST, "Нельзя вывести отрицательную сумму")
         val user = userService.findEntityById(getPrincipal())
         val balance = dao.getUserBalance(user.id)
-        if (request.price > balance) throw TooLittleBalanceException()
+        if (request.price > (balance ?: 0)) throw TooLittleBalanceException()
         val entity = dao.save(mapper.asEntity(request).apply {
             this.price = -price
             this.user = user
