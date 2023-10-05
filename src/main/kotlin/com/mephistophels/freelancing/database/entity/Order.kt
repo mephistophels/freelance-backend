@@ -11,7 +11,7 @@ class Order(
     @Column(name = "title", nullable = false)
     var title: String,
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, length = 5_000)
     var content: String,
 
     @Column(name = "price", nullable = false)

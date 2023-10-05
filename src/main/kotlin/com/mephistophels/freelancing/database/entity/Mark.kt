@@ -14,6 +14,7 @@ class Mark(
     @Column(name = "message", nullable = true)
     var message : String,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "recipient", nullable = false)
     var recipient: MarkRecipient,
 
