@@ -1,7 +1,7 @@
 package com.mephistophels.freelancing.security
 
 import com.mephistophels.freelancing.errors.ApiError
-//import com.mephistophels.freelancing.errors.ExceptionResolver
+import com.mephistophels.freelancing.errors.ExceptionResolver
 import com.mephistophels.freelancing.util.API_PUBLIC
 import com.mephistophels.freelancing.util.API_VERSION_1
 import com.mephistophels.freelancing.util.containsAnyPath
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse
 class JwtFilter(
     @Lazy
     private val jwtParser: JwtParser,
-//    private val exceptionResolver: ExceptionResolver,
+    private val exceptionResolver: ExceptionResolver,
 ) : OncePerRequestFilter() {
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
@@ -38,7 +38,7 @@ class JwtFilter(
             SecurityContextHolder.getContext().authentication = jwtParser.createAuthToken(header)
             filterChain.doFilter(request, response)
         } catch (exception: ApiError) {
-//            exceptionResolver.resolveException(request, response, exception)
+            exceptionResolver.resolveException(request, response, exception)
         }
     }
 }
