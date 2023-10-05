@@ -13,6 +13,6 @@ open class UserMediumResponse(
     name: String,
     patronymic: String? = null,
     birthday: LocalDate? = null,
+    mark: UserMarkResponse,
     val bio: String? = null,
-    val mark: UserMarkResponse,
-) : UserResponse(id, createdAt, email, surname, name, patronymic, birthday)
+) : UserResponse(id, createdAt, email, surname, name, patronymic, birthday, mark)

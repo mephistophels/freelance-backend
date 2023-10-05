@@ -22,6 +22,10 @@ class OrderMapper(
         )
     }
 
+    fun asNullableResponse(entity: Order?): OrderResponse? {
+        return if (entity == null) null else asResponse(entity)
+    }
+
     fun asResponse(entity: Order): OrderResponse {
         return OrderResponse(
             id = entity.id,

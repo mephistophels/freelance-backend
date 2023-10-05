@@ -6,5 +6,6 @@ import java.time.LocalDateTime
 class BalanceOperationResponse(
     id: Long,
     createdAt: LocalDateTime,
-    val price: Int
+    val price: Int,
+    val order: OrderResponse? = null
 ): AbstractCreatedAtResponse(id, createdAt)
