@@ -19,6 +19,8 @@ import java.util.*
 interface OrderDao : AppRepository<Order>, PagingAndSortingRepository<Order, Long>, CrudRepository<Order, Long> {
     fun findAllByCustomerId(customerId: Long): Optional<List<Order>>
 
+    fun findAllByExecutorId(executorId: Long): Optional<List<Order>>
+
     @Modifying
     @Query(value = "update Order o set o.status = ?1 where o.id = ?2")
     @Transactional

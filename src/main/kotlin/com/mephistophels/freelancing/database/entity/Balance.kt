@@ -12,7 +12,7 @@ class Balance(
     var price: Int
 
 ) : AbstractCreatedAtEntity() {
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId")
     lateinit var user: User

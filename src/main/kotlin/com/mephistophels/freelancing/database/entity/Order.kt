@@ -22,7 +22,6 @@ class Order(
     var status: OrderStatus,
 ): AbstractCreatedAtEntity() {
 
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customerId")
     lateinit var customer: User
@@ -30,7 +29,6 @@ class Order(
     @OneToMany(mappedBy = "order")
     var message: Set<Message> = HashSet<Message>()
 
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "executorId")
     var executor: User? = null

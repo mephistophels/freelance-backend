@@ -39,13 +39,13 @@ class UserServiceImpl(
     override fun getSelfProfile(userId: Long): UserFullResponse {
         val user = findEntityById(userId)
         val balance = balanceService.getBalanceAmount(user)
-        val mark = markService.getUserMark(user)
+        val mark = markService.getUserMark(user.id)
         return mapper.asUserFullResponse(user, balance, mark)
     }
 
     override fun getUserProfile(userId: Long): UserMediumResponse {
         val user = findEntityById(userId)
-        val mark = markService.getUserMark(user)
+        val mark = markService.getUserMark(user.id)
         return mapper.asUserMediumResponse(user, mark)
     }
 

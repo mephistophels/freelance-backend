@@ -1,5 +1,6 @@
 package com.mephistophels.freelancing.model.response
 
 class UserMarkResponse(
-    val mark: Double
+    val markAsCustomer: Double,
+    val markAsExecutor: Double,
 )
