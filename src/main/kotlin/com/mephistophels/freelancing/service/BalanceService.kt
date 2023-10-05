@@ -1,5 +1,6 @@
 package com.mephistophels.freelancing.service
 
+import com.mephistophels.freelancing.database.entity.Balance
 import com.mephistophels.freelancing.database.entity.User
 import com.mephistophels.freelancing.model.request.BalanceOperationRequest
 import com.mephistophels.freelancing.model.request.PageRequest
@@ -13,4 +14,6 @@ interface BalanceService {
     fun withdrawFromBalance(request: BalanceOperationRequest): BalanceOperationResponse
     fun getBalanceAmount(user: User): UserBalanceResponse
     fun getBalanceAmount(userId: Long): UserBalanceResponse
+    fun replenishBalance(userId: Long, request: BalanceOperationRequest): BalanceOperationResponse
+    fun save(entity: Balance): Balance
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "OrderExecutionRequest")
 class OrderExecutionRequestEntity(
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, length = 5_000)
     val content: String
 ) : AbstractCreatedAtEntity() {
 

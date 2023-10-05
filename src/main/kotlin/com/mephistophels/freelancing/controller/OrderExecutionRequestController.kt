@@ -6,6 +6,7 @@ import com.mephistophels.freelancing.model.response.OrderExecutionRequestRespons
 import com.mephistophels.freelancing.model.response.common.PageResponse
 import com.mephistophels.freelancing.service.OrderExecutionRequestService
 import com.mephistophels.freelancing.util.API_VERSION_1
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -20,7 +21,7 @@ class OrderExecutionRequestController(
 ) {
 
     @PostMapping
-    fun sendRequest(@PathVariable orderId: Long, @RequestBody request: OrderExecutionRequestRequest): OrderExecutionRequestResponse {
+    fun sendRequest(@PathVariable orderId: Long, @Valid @RequestBody request: OrderExecutionRequestRequest): OrderExecutionRequestResponse {
         return service.createRequest(orderId, request)
     }
 

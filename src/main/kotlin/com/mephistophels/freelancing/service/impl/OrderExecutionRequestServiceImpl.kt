@@ -2,6 +2,7 @@ package com.mephistophels.freelancing.service.impl
 
 import com.mephistophels.freelancing.database.entity.Order
 import com.mephistophels.freelancing.database.entity.OrderExecutionRequestEntity
+import com.mephistophels.freelancing.database.entity.OrderStatus
 import com.mephistophels.freelancing.model.request.OrderExecutionRequestRequest
 import com.mephistophels.freelancing.database.repository.OrderExecutionRequestDao
 import com.mephistophels.freelancing.errors.ApiError
@@ -36,6 +37,7 @@ class OrderExecutionRequestServiceImpl(
         if (dao.existsByExecutorIdAndOrderId(getPrincipal(), orderId)) throw ApiError(HttpStatus.BAD_REQUEST, message = "Нельзя подать заявку дважды")
         val entity = mapper.asEntity(request).apply {
             this.order = orderService.findEntityById(orderId)
+            if (this.order.customer.id == getPrincipal()) throw ApiError(HttpStatus.BAD_REQUEST, message = "Нельзя подать заявку на своё задание")
             this.executor = userService.findEntityById(getPrincipal())
         }.also { dao.save(it) }
         return mapper.asResponse(entity)
@@ -55,8 +57,7 @@ class OrderExecutionRequestServiceImpl(
         val request = findEntityById(requestId)
         if (request.order.id != orderId) throw ApiError(HttpStatus.BAD_REQUEST, message = "Доступ запрещён")
         order.executor = request.executor
+        order.status = OrderStatus.IN_PROGRESS
         return mapper.asResponse(request)
     }
-
-
 }

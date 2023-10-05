@@ -1,5 +1,6 @@
 package com.mephistophels.freelancing.service.impl
 
+import com.mephistophels.freelancing.database.entity.Balance
 import com.mephistophels.freelancing.database.entity.User
 import com.mephistophels.freelancing.database.repository.BalanceDao
 import com.mephistophels.freelancing.errors.ApiError
@@ -26,6 +27,8 @@ class BalanceServiceImpl(
     private val mapper: BalanceMapper,
 ) : BalanceService {
 
+    override fun save(entity: Balance) = dao.save(entity)
+
     override fun getList(request: PageRequest): PageResponse<BalanceOperationResponse> {
         val page = dao.findAll(request.pageable)
         return mapper.asPageResponse(page)
@@ -41,16 +44,20 @@ class BalanceServiceImpl(
         return mapper.asBalanceResponse(amount)
     }
 
-    override fun replenishBalance(request: BalanceOperationRequest): BalanceOperationResponse {
+    override fun replenishBalance(userId: Long, request: BalanceOperationRequest): BalanceOperationResponse {
         if (request.price <= 0) throw ApiError(
             status = HttpStatus.BAD_REQUEST,
             "Нельзя пополнить на отрицательную сумму"
         )
-        val user = userService.findEntityById(getPrincipal())
+        val user = userService.findEntityById(userId)
         val entity = dao.save(mapper.asEntity(request).apply {
             this.user = user
         })
         return mapper.asOperationResponse(entity)
+    }
+
+    override fun replenishBalance(request: BalanceOperationRequest): BalanceOperationResponse {
+        return replenishBalance(getPrincipal(), request)
     }
 
     override fun withdrawFromBalance(request: BalanceOperationRequest): BalanceOperationResponse {
