@@ -2,6 +2,8 @@ package com.mephistophels.freelancing.database.repository
 
 import com.mephistophels.freelancing.database.entity.Balance
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Repository
 interface BalanceDao : AppRepository<Balance>, PagingAndSortingRepository<Balance, Long>, CrudRepository<Balance, Long> {
     @Query(value = "SELECT sum(b.price) FROM Balance b WHERE b.user.id = ?1")
     fun getUserBalance(userId: Long): Int?
+
+    fun findAllByUserId(userId: Long, pageable: Pageable): Page<Balance>
 
     @Query(value ="select b.price from Balance b where b.user.id = ?1")
     fun getUserBalanceHistory(userId: Long) : List<Int>

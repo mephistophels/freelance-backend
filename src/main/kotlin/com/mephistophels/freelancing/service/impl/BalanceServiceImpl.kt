@@ -1,6 +1,7 @@
 package com.mephistophels.freelancing.service.impl
 
 import com.mephistophels.freelancing.database.entity.Balance
+import com.mephistophels.freelancing.database.entity.Order
 import com.mephistophels.freelancing.database.entity.User
 import com.mephistophels.freelancing.database.repository.BalanceDao
 import com.mephistophels.freelancing.errors.ApiError
@@ -30,7 +31,7 @@ class BalanceServiceImpl(
     override fun save(entity: Balance) = dao.save(entity)
 
     override fun getList(request: PageRequest): PageResponse<BalanceOperationResponse> {
-        val page = dao.findAll(request.pageable)
+        val page = dao.findAllByUserId(getPrincipal(), request.pageable)
         return mapper.asPageResponse(page)
     }
 
@@ -44,7 +45,7 @@ class BalanceServiceImpl(
         return mapper.asBalanceResponse(amount)
     }
 
-    override fun replenishBalance(userId: Long, request: BalanceOperationRequest): BalanceOperationResponse {
+    override fun replenishBalance(request: BalanceOperationRequest, userId: Long, order: Order?): BalanceOperationResponse {
         if (request.price <= 0) throw ApiError(
             status = HttpStatus.BAD_REQUEST,
             "Нельзя пополнить на отрицательную сумму"
@@ -52,22 +53,20 @@ class BalanceServiceImpl(
         val user = userService.findEntityById(userId)
         val entity = dao.save(mapper.asEntity(request).apply {
             this.user = user
+            this.order = order
         })
         return mapper.asOperationResponse(entity)
     }
 
-    override fun replenishBalance(request: BalanceOperationRequest): BalanceOperationResponse {
-        return replenishBalance(getPrincipal(), request)
-    }
-
-    override fun withdrawFromBalance(request: BalanceOperationRequest): BalanceOperationResponse {
+    override fun withdrawFromBalance(request: BalanceOperationRequest, userId: Long, order: Order?): BalanceOperationResponse {
         if (request.price <= 0) throw ApiError(status = HttpStatus.BAD_REQUEST, "Нельзя вывести отрицательную сумму")
-        val user = userService.findEntityById(getPrincipal())
+        val user = userService.findEntityById(userId)
         val balance = dao.getUserBalance(user.id)
         if (request.price > (balance ?: 0)) throw TooLittleBalanceException()
         val entity = dao.save(mapper.asEntity(request).apply {
             this.price = -price
             this.user = user
+            this.order = order
         })
         return mapper.asOperationResponse(entity)
     }

@@ -59,14 +59,10 @@ class OrderAnswerServiceImpl(
         if (entity.order.status == OrderStatus.ACCEPTED) throw ApiError(HttpStatus.BAD_REQUEST, message = "Ответ уже одобрен")
         entity.status = OrderAnswerStatus.ACCEPTED
         orderService.changeStatus(entity.order.id, OrderStatus.ACCEPTED)
-        balanceService.save(Balance(-entity.order.price).apply {
-            this.user = entity.order.customer
-            this.order = entity.order
-        })
-        balanceService.save(Balance(entity.order.price).apply {
-            this.user = entity.order.executor!!
-            this.order = entity.order
-        })
+
+        balanceService.withdrawFromBalance(BalanceOperationRequest(entity.order.price), entity.order.customer.id, entity.order)
+        balanceService.replenishBalance(BalanceOperationRequest(entity.order.price), entity.order.executor!!.id, entity.order)
+
         return mapper.asResponse(entity)
     }
 }

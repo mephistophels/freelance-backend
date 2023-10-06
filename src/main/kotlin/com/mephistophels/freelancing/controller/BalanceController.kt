@@ -1,7 +1,5 @@
 package com.mephistophels.freelancing.controller
 
-import com.mephistophels.freelancing.database.repository.BalanceDao
-import com.mephistophels.freelancing.mappers.BalanceMapper
 import com.mephistophels.freelancing.model.request.BalanceOperationRequest
 import com.mephistophels.freelancing.model.request.PageRequest
 import com.mephistophels.freelancing.model.response.BalanceOperationResponse
@@ -24,12 +22,12 @@ class BalanceController(
 
     @PostMapping("/replenish")
     fun replenishBalance(@RequestBody request: BalanceOperationRequest): BalanceOperationResponse {
-        return service.replenishBalance(request)
+        return service.replenishBalance(request, getPrincipal())
     }
 
      @PostMapping("/withdraw")
     fun withdrawFromBalance(@RequestBody request: BalanceOperationRequest): BalanceOperationResponse {
-        return service.withdrawFromBalance(request)
+        return service.withdrawFromBalance(request, getPrincipal())
     }
 
     @GetMapping("/info")
