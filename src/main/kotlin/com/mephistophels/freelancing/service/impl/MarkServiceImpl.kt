@@ -41,8 +41,8 @@ class MarkServiceImpl(
             mark.mark,
             mark.message,
             mark.recipient,
-            mark.customer.id,
-            mark.executor.id,
+            mark.order.customer.id,
+            mark.order.executor!!.id,
             mark.order.id,
         )
 

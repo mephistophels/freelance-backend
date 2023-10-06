@@ -18,16 +18,7 @@ class Mark(
     @Column(name = "recipient", nullable = false)
     var recipient: MarkRecipient,
 
-
 ) : AbstractCreatedAtEntity() {
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customerId")
-    lateinit var customer: User
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "executorId")
-    lateinit var executor: User
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "orderId")

@@ -42,21 +42,10 @@ class User(
     @OneToMany(mappedBy = "user")
     var history: Set<Balance> = HashSet<Balance>()
 
-    @OneToMany(mappedBy = "customer")
-    var customerMark: MutableList<Mark> = mutableListOf()
 
     @OneToMany(mappedBy = "executor")
     var workingOrder: MutableSet<Order> = HashSet<Order>()
 
     @OneToMany(mappedBy = "customer")
     var createdOrder: MutableSet<Order> = HashSet<Order>()
-
-    @OneToMany(mappedBy = "executor")
-    var executorMark: MutableSet<Mark> = HashSet<Mark>()
-
-    @OneToMany(mappedBy = "sender")
-    var sendedMessage: Set<Message> = HashSet<Message>()
-
-    @OneToMany(mappedBy = "recipient")
-    var recievedMessage: Set<Message> = HashSet<Message>()
 }

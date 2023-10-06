@@ -8,19 +8,13 @@ import org.hibernate.annotations.OnDeleteAction
 @Table(name = "MessageTable")
 class Message(
     @Column(name = "message", nullable = true)
-    var message : String
+    var message : String,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "recipient", nullable = false)
+    var recipient: MarkRecipient
 ) : AbstractCreatedAtEntity(){
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "recipientId")
-    lateinit var recipient: User
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "senderId")
-    lateinit var sender: User
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "orderId")
     lateinit var order: Order
-
 }

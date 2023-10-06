@@ -46,8 +46,8 @@ class MarkMapper {
             message = message,
             recipient = recipient,
         ).apply {
-            this.customer = customer.get()
-            this.executor = executor.get()
+            this.order.customer = customer.get()
+            this.order.executor = executor.get()
             this.order = order.get()
         }
     }
