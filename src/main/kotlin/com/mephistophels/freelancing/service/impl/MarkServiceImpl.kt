@@ -1,23 +1,22 @@
 package com.mephistophels.freelancing.service.impl
 
-import com.mephistophels.freelancing.database.entity.User
 import com.mephistophels.freelancing.database.repository.MarkDao
 import com.mephistophels.freelancing.database.repository.OrderDao
-import com.mephistophels.freelancing.database.repository.UserDao
 import com.mephistophels.freelancing.mappers.MarkMapper
 import com.mephistophels.freelancing.model.request.MarkRequest
 import com.mephistophels.freelancing.model.response.MarkResponse
 import com.mephistophels.freelancing.model.response.UserMarkResponse
 import com.mephistophels.freelancing.service.MarkService
-import org.springframework.context.annotation.Lazy
+import com.mephistophels.freelancing.service.OrderService
+import com.mephistophels.freelancing.service.UserService
 import org.springframework.stereotype.Service
 
 @Service
 class MarkServiceImpl(
     private val mapper: MarkMapper,
     private val dao: MarkDao,
-    private val userDao: UserDao,
-    private val orderDao: OrderDao,
+    private val userService: UserService,
+    private val orderService: OrderService,
 ) : MarkService {
 
     override fun getUserMark(userId: Long): UserMarkResponse {
@@ -27,16 +26,18 @@ class MarkServiceImpl(
     }
 
     override fun createMark(markRequest: MarkRequest): MarkResponse {
-        val customer = userDao.findById(markRequest.customerId)
-        val executor = userDao.findById(markRequest.executorId)
-        val order = orderDao.findById(markRequest.orderId)
-        val mark = dao.save(mapper.asEntity(
+        val customer = userService.findEntityById(markRequest.customerId)
+        val executor = userService.findEntityById(markRequest.executorId)
+        val order = orderService.findEntityById(markRequest.orderId)
+        val mark = mapper.asEntity(
             markRequest.mark,
             markRequest.message,
             markRequest.recipient,
             customer,
             executor,
-            order,))
+            order
+        ).also { dao.save(it) }
+
         return mapper.asMarkResponse(
             mark.mark,
             mark.message,
@@ -45,6 +46,5 @@ class MarkServiceImpl(
             mark.order.executor!!.id,
             mark.order.id,
         )
-
     }
 }

@@ -37,18 +37,18 @@ class MarkMapper {
         mark: Int,
         message: String,
         recipient: MarkRecipient,
-        customer: Optional<User>,
-        executor: Optional<User>,
-        order: Optional<Order>,
+        customer: User,
+        executor: User,
+        order: Order,
     ): Mark{
         return Mark(
             mark = mark,
             message = message,
             recipient = recipient,
         ).apply {
-            this.order.customer = customer.get()
-            this.order.executor = executor.get()
-            this.order = order.get()
+            this.order = order
+            this.order.customer = customer
+            this.order.executor = executor
         }
     }
 }

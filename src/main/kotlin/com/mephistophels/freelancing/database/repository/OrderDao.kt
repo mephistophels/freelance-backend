@@ -1,11 +1,9 @@
 package com.mephistophels.freelancing.database.repository
 
-import com.mephistophels.freelancing.database.entity.Balance
 import com.mephistophels.freelancing.database.entity.Order
 import com.mephistophels.freelancing.database.entity.OrderStatus
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
